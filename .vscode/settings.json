@@ -1,0 +1,22 @@
+{
+  "editor.formatOnSave": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+
+  "[javascriptreact, typescriptreact]": {
+    "source.fixAll.stylelint": false,
+    "source.fixAll.eslint": true
+  },
+
+  "eslint.workingDirectories": [
+    {
+      "directory": "src",
+      "changeProcessCWD": true
+    },
+  ],
+}
