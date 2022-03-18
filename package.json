@@ -15,6 +15,7 @@
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.15.0",
     "@typescript-eslint/parser": "^5.15.0",
+    "eslint": "^8.11.0",
     "eslint-plugin-jest": "^26.1.1",
     "jest": "^27.5.1",
     "prettier": "^2.6.0",
@@ -28,5 +29,8 @@
     "lint:fix": "eslint src --fix --ext .js,.ts",
     "test": "jest --config jest.config.json",
     "publish": "npm publish"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
