@@ -23,7 +23,8 @@
     "typescript": "^4.6.2"
   },
   "dependencies": {
-    "@types/forest-express-sequelize": "^7.5.1"
+    "@types/forest-express-sequelize": "^7.5.1",
+    "lodash": "^4.17.21"
   },
   "scripts": {
     "build": "tsc",
