@@ -22,7 +22,9 @@
     "ts-jest": "^27.1.3",
     "typescript": "^4.6.2"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@types/forest-express-sequelize": "^7.5.1"
+  },
   "scripts": {
     "build": "tsc",
     "lint": "eslint src --ext .js,.ts",

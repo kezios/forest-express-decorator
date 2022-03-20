@@ -1,7 +1,7 @@
 export class BaseCollection {
   public name: string | undefined;
-  public fields: any[] = [];
-  public actions: any[] = [];
+  public fields!: any[];
+  public actions!: any[];
 
   initialize(){
    console.log('name', this.name);
