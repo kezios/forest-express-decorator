@@ -1,13 +1,29 @@
+import { BaseCollection } from './../core/BaseCollection';
 import { BaseSmartAction } from './../core/BaseSmartAction';
 import { SmartActionFieldOptions, SMART_ACTION_TYPE } from '../types';
 import { omit } from 'lodash';
 
-const SmartAction = (smartActionlabel: string, smartActionType: SMART_ACTION_TYPE) => {
+interface SmartActionOptions {
+  label: string,
+  type: SMART_ACTION_TYPE
+}
+
+const SmartAction = (options: SmartActionOptions) => {
   return function <T extends { new(...args: any[]): {} }>(constructor: T) {
       return class extends constructor {
-        label = smartActionlabel;
-        type = smartActionType;
+        label = options.label;
+        type = options.type;
       }
+  }
+}
+
+
+function SmartActionIntegration<Type extends BaseSmartAction>(classSmartAction: { new (): Type }) {
+  const smartAction = new classSmartAction();
+
+  return function(target: BaseCollection, propertyKey: string) {
+    if(target.actions === undefined) target.actions = [];
+    target.actions.push(smartAction);
   }
 }
 
@@ -19,4 +35,4 @@ const SmartActionField = (options: SmartActionFieldOptions) => {
   }
 }
 
-export { SmartAction, SmartActionField };
+export { SmartAction, SmartActionField, SmartActionIntegration };

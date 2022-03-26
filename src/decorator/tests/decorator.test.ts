@@ -1,14 +1,24 @@
 import { SMART_ACTION_TYPE } from './../../types/SmartAction';
 import { Post as EmptyPost } from './sample/empty-collection/Post';
 import { Post as SmartFieldPost } from './sample/smart-field-collection/Post';
+import { Post as PostWithSmartActions } from './sample/collection-with-smart-action/Post';
+
 import { AddLike } from './sample/empty-smart-action/AddLike';
+import { AddLike as AddLikeIntegrated } from './sample/collection-with-smart-action/AddLike';
 import { AddLike as AddLikeWithFields } from './sample/smart-action-with-fields/AddLike';
 
 describe('Decorator', ()=>{
   describe('Collection', ()=>{
-    it('initialize collection with', ()=>{
+    it('initialize collection', ()=>{
       const post = new EmptyPost();
       expect(post.name).toBe('post')
+    })
+
+    it('initialize collection with smartActions', ()=>{
+      const post = new PostWithSmartActions();
+
+      expect(post.actions).toHaveLength(1);
+      expect(post.actions[0]).toBeInstanceOf(AddLikeIntegrated)
     })
   })
 
