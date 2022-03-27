@@ -22,8 +22,8 @@ function SmartActionIntegration<Type extends BaseSmartAction>(classSmartAction: 
   const smartAction = new classSmartAction();
 
   return function(target: BaseCollection, propertyKey: string) {
-    if(target.actions === undefined) target.actions = [];
-    target.actions.push(smartAction);
+    if(target.actions === undefined) target.actions = {};
+    target.actions[propertyKey] = smartAction;
   }
 }
 

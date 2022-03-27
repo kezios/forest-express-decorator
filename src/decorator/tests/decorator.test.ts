@@ -17,9 +17,19 @@ describe('Decorator', ()=>{
     it('initialize collection with smartActions', ()=>{
       const post = new PostWithSmartActions();
 
-      expect(post.actions).toHaveLength(1);
-      expect(post.actions[0]).toBeInstanceOf(AddLikeIntegrated)
+      expect(Object.keys(post.actions)).toHaveLength(1);//todo update this
+      expect(post.actions['add-like']).toBeInstanceOf(AddLikeIntegrated)
     })
+
+    it.todo('should create route for smart-action endpoint', ()=>{
+      //todo start express app
+      const post = new PostWithSmartActions();
+      //call post.initilize(app)
+
+      //supertest(app).post('/post/smart-action/add-like').expect(201)
+    })
+
+    it.todo('should throw error if called initialize without name defined')
   })
 
   describe('SmartField', ()=>{
