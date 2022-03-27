@@ -1,11 +1,13 @@
+import { hookFunction } from './../types/SmartAction';
 import { BaseCollection } from './../core/BaseCollection';
 import { BaseSmartAction } from './../core/BaseSmartAction';
 import { SmartActionFieldOptions, SMART_ACTION_TYPE } from '../types';
-import { omit } from 'lodash';
+import { kebabCase, omit } from 'lodash';
 
 interface SmartActionOptions {
   label: string,
-  type: SMART_ACTION_TYPE
+  type: SMART_ACTION_TYPE,
+  onLoad?: hookFunction,
 }
 
 const SmartAction = (options: SmartActionOptions) => {
@@ -23,7 +25,7 @@ function SmartActionIntegration<Type extends BaseSmartAction>(classSmartAction: 
 
   return function(target: BaseCollection, propertyKey: string) {
     if(target.actions === undefined) target.actions = {};
-    target.actions[propertyKey] = smartAction;
+    target.actions[kebabCase(propertyKey)] = smartAction;
   }
 }
 

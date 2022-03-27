@@ -1,26 +1,25 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import express, { Application } from 'express';
 import { kebabCase } from 'lodash';
 import { BaseSmartAction } from './BaseSmartAction';
+
 export class BaseCollection {
   public name: string | undefined;
   public fields!: any[];
   public actions!: Record<string, BaseSmartAction>;
 
-  initialize(app: Application){
+  initialize(app: Application, Liana: any){
+    console.log('this.name', this.name)
     if(this.name === undefined)
       throw 'Cannot initialize collection with undefined name';
 
-    console.log('this', this)
-    console.log('name', this.name);
-    console.log('fields', this.fields);
-    console.log('actions', this.actions);
-
     const router = express.Router();
-    // const permissionMiddleware = new PermissionMiddlewareCreator(this.name);
+    const permissionMiddleware = new Liana.PermissionMiddlewareCreator(this.name);
 
     for(const smartActionName in this.actions){
       router.post(
         `${kebabCase(this.name)}/smart-action/${kebabCase(smartActionName)}`,
+        permissionMiddleware.smartAction(),
         this.actions[smartActionName].onCall
       )
     }

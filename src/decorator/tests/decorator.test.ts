@@ -1,7 +1,16 @@
+/* eslint-disable jest/expect-expect */
+import express from 'express';
+import request from 'supertest';
+
+import * as Liana from '../../tests/utils/PermissionMiddlewareCreator'
+
 import { SMART_ACTION_TYPE } from './../../types/SmartAction';
 import { Post as EmptyPost } from './sample/empty-collection/Post';
 import { Post as SmartFieldPost } from './sample/smart-field-collection/Post';
+
 import { Post as PostWithSmartActions } from './sample/collection-with-smart-action/Post';
+import { InvalidPost as InvalidPostWithSmartActions } from './sample/collection-with-smart-action/InvalidPost';
+
 
 import { AddLike } from './sample/empty-smart-action/AddLike';
 import { AddLike as AddLikeIntegrated } from './sample/collection-with-smart-action/AddLike';
@@ -17,19 +26,30 @@ describe('Decorator', ()=>{
     it('initialize collection with smartActions', ()=>{
       const post = new PostWithSmartActions();
 
-      expect(Object.keys(post.actions)).toHaveLength(1);//todo update this
+      expect(Object.keys(post.actions)).toHaveLength(1);
       expect(post.actions['add-like']).toBeInstanceOf(AddLikeIntegrated)
     })
 
-    it.todo('should create route for smart-action endpoint', ()=>{
-      //todo start express app
+    it('should create route for smart-action endpoint', ()=>{
+      const app = express();
+
       const post = new PostWithSmartActions();
-      //call post.initilize(app)
+      post.initialize(app, Liana)
 
-      //supertest(app).post('/post/smart-action/add-like').expect(201)
+      request(app)
+        .post(`/post/smart-action/add-like`)
+        .expect(201);
+    });
+
+    it('should throw error if called initialize without name defined', ()=>{
+      const app = express();
+
+      const invalidPost = new InvalidPostWithSmartActions();
+
+      expect(()=>{
+        invalidPost.initialize(app, Liana);
+      }).toThrowError("Cannot initialize collection with undefined name")
     })
-
-    it.todo('should throw error if called initialize without name defined')
   })
 
   describe('SmartField', ()=>{
