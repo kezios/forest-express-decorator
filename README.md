@@ -49,9 +49,7 @@ class GenerateInvoice extends SmartAction {
     })
     price;
 
-    @EndPoint()
-    @Post({url: ''})
-    onRequest = (req, res) => {
+    onCall = (req, res) => {
         const price = req.body.data.attributes.values.price;
         // .....
         return res.status(200).send({success: 'Invoice generated !'})
