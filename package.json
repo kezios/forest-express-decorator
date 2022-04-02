@@ -1,6 +1,6 @@
 {
   "name": "forest-express-decorator",
-  "version": "0.1.0-alpha",
+  "version": "0.1.4-alpha",
   "description": "🚀 Decorators for Express Forest Admin",
   "main": "dist/index.js",
   "repository": "git@github.com:kezios/forest-express-decorator.git",
@@ -35,7 +35,7 @@
     "lint": "eslint src --ext .js,.ts",
     "lint:fix": "eslint src --fix --ext .js,.ts",
     "test": "jest --config jest.config.json",
-    "publish": "npm publish"
+    "publish": "npm publish --access public"
   },
   "files": [
     "dist/**/*"
