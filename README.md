@@ -16,8 +16,7 @@ yarn add forest-express-decorator
 
 ```js
 @Collection('customers')
-@Model('customer')
-class CustomerCollection extends Collection {
+class CustomerCollection extends BaseCollection {
   @SmartField({
     type: 'String',
     get: (customer) => `${customer.firstname} ${customer.lastname}`,
@@ -26,21 +25,20 @@ class CustomerCollection extends Collection {
       customer.firstname = names[0];
       customer.lastname = names[1];
 
-      // Don't forget to return the customer.
       return customer;
     },
   })
   fullname;
 
   @SmartAction(GenerateInvoice)
-  generateInvoice;
+  generateInvoice: GenerateInvoice;
 }
 ```
 
 #### Smart action :
 
 ```js
-class GenerateInvoice extends SmartAction {
+class GenerateInvoice extends BaseSmartAction {
     @SmartActionField({
         type: 'Number',
         label: 'Price',
