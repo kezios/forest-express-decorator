@@ -15,6 +15,7 @@ const SmartAction = (options: SmartActionOptions) => {
       return class extends constructor {
         label = options.label;
         type = options.type;
+        onLoad = options.onLoad;
       }
   }
 }
@@ -33,7 +34,11 @@ const SmartActionField = (options: SmartActionFieldOptions) => {
   return function(target: BaseSmartAction, propertyKey: string) {
     //todo use propery key to create reverser-map propertyKey <--> field
     if(target.fields === undefined) target.fields = [];
-    target.fields.push({...omit(options, 'label'), field: options.label});
+    target.fields.push({
+      ...omit(options, 'label'),
+      field: options.label,
+      name: propertyKey,
+    });
   }
 }
 
