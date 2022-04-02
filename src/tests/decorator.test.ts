@@ -30,7 +30,7 @@ describe('Decorator', ()=>{
       expect(post.actions['add-like']).toBeInstanceOf(AddLikeIntegrated)
     })
 
-    it('should create route for smart-action endpoint', ()=>{
+    it('should create route for smart-action endpoint', async ()=>{
       const app = express();
 
       const post = new PostWithSmartActions();
@@ -61,9 +61,9 @@ describe('Decorator', ()=>{
       expect(config.actions[0].hooks).toHaveProperty('change');
       expect(config.actions[0].hooks.change).toHaveProperty('onNbChange');
 
-      request(app)
+      await request(app)
         .post(`/post/smart-action/add-like`)
-        .expect(201);
+        .expect(201)
     });
 
     it('should throw error if called initialize without name defined', ()=>{

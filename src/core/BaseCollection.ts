@@ -59,7 +59,7 @@ export class BaseCollection {
 
     for(const smartActionName in this.actions){
       router.post(
-        `${kebabCase(this.name)}/smart-action/${kebabCase(smartActionName)}`,
+        `/${kebabCase(this.name)}/smart-action/${kebabCase(smartActionName)}`,
         permissionMiddleware.smartAction(),
         this.actions[smartActionName].onCall
       )
