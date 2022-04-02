@@ -1,7 +1,7 @@
-import { BaseCollection } from "../../../../core"
-import { Collection } from "../../../Collection";
-import { SmartActionIntegration } from "../../../SmartAction";
-import { SmartField } from "../../../SmartField"
+import { BaseCollection } from "../../../core"
+import { Collection } from "../../../decorator/Collection";
+import { SmartActionIntegration } from "../../../decorator/SmartAction";
+import { SmartField } from "../../../decorator/SmartField"
 
 import { AddLike } from './AddLike';
 

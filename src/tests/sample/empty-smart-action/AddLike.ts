@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { BaseSmartAction } from '../../../../core/BaseSmartAction';
-import { SMART_ACTION_TYPE } from '../../../../types';
-import { SmartAction } from '../../../SmartAction';
+import { BaseSmartAction } from '../../../core/BaseSmartAction';
+import { SMART_ACTION_TYPE } from '../../../types';
+import { SmartAction } from '../../../decorator/SmartAction';
 
 @SmartAction({label: 'Ajouter un like', type: SMART_ACTION_TYPE.SINGLE})
 export class AddLike extends BaseSmartAction {

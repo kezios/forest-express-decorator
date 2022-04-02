@@ -2,9 +2,9 @@
 import express from 'express';
 import request from 'supertest';
 
-import * as Liana from '../../tests/utils/PermissionMiddlewareCreator'
+import * as Liana from '../test-utils/PermissionMiddlewareCreator'
 
-import { SMART_ACTION_TYPE } from './../../types/SmartAction';
+import { SMART_ACTION_TYPE } from '../types/SmartAction';
 import { Post as EmptyPost } from './sample/empty-collection/Post';
 import { Post as SmartFieldPost } from './sample/smart-field-collection/Post';
 
@@ -34,7 +34,32 @@ describe('Decorator', ()=>{
       const app = express();
 
       const post = new PostWithSmartActions();
-      post.initialize(app, Liana)
+      const config = post.initialize(app, Liana);
+
+      expect(config.actions).toEqual([
+        expect.objectContaining(
+          {
+            name: 'Ajouter un like',
+            type: 'single',
+            fields: [
+              expect.objectContaining({
+                name: 'nb',
+                field: 'Nombre de likes à ajouter',
+                type: 'Number',
+                hook: 'onNbChange'
+              }),
+              {
+                name: 'date',
+                field: 'Date',
+                type: 'DateOnly'
+              }
+            ]
+          }
+        )
+      ]);
+
+      expect(config.actions[0].hooks).toHaveProperty('change');
+      expect(config.actions[0].hooks.change).toHaveProperty('onNbChange');
 
       request(app)
         .post(`/post/smart-action/add-like`)

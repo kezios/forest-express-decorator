@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import { BaseSmartAction } from '../../../../core/BaseSmartAction';
-import { SMART_ACTION_TYPE } from '../../../../types';
-import { SmartAction, SmartActionField } from '../../../SmartAction';
+import { BaseSmartAction } from '../../../core/BaseSmartAction';
+import { SMART_ACTION_TYPE } from '../../../types';
+import { SmartAction, SmartActionField } from '../../../decorator/SmartAction';
 
 const onNbChange = ({fields, request}: any) => {
   return fields;
