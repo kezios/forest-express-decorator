@@ -1,5 +1,5 @@
 {
-  "name": "forest-express-decorator",
+  "name": "@kezios/forest-express-decorator",
   "version": "0.1.4-alpha",
   "description": "🚀 Decorators for Express Forest Admin",
   "main": "dist/index.js",
